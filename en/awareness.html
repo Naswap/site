@@ -1,161 +1,242 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Technology Awareness Section
-</title>
+  <title>Dv</title>
+
+  <link rel="icon" href="https://img.icons8.com/ios-filled/50/ffcc00/n.png" type="image/png">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="https://nassrmualla.wap.sh/css/awareness.css">
+
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(ellipse at bottom, #0e0e0e 0%, #000000 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+      padding: 40px 20px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://i.imgur.com/U3T3dUJ.png') repeat top center;
+      z-index: 0;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.1;
+    }
+
+    @keyframes moveStars {
+      0% { background-position: 0 0; }
+      100% { background-position: -10000px 5000px; }
+    }
+
+    .uiverse-loader {
+      width: 80px;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      margin-top: 40px;
+      z-index: 1;
+    }
+
+    .uiverse-loader span {
+      width: 16px;
+      height: 16px;
+      background: #ffcc00;
+      border-radius: 50%;
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    .uiverse-loader span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .uiverse-loader span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-20px);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ffcc00;
+      z-index: 1;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #bbbbbb;
+      max-width: 500px;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+
+    .quote {
+      color: #888;
+      font-size: 1rem;
+      margin-top: 15px;
+      font-style: italic;
+      z-index: 1;
+    }
+
+    .back-btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      border: 2px solid #ffcc00;
+      background-color: transparent;
+      color: #ffcc00;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .back-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, #ffcc00 0%, transparent 70%);
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.5s ease;
+      z-index: 0;
+      border-radius: 50%;
+    }
+
+    .back-btn:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .back-btn:hover {
+      color: #0e0e0e;
+    }
+
+    .back-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 15px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #888888;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 1;
+    }
+
+    .footer i {
+      color: #ffcc00;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background: #f4f4f4;
+        color: #222;
+      }
+
+      .quote {
+        color: #444;
+      }
+
+      .footer {
+        color: #444;
+      }
+
+      .footer i {
+        color: #ffcc00;
+      }
+
+      .back-btn {
+        border-color: #222;
+        color: #222;
+      }
+
+      .back-btn:hover {
+        color: #fff;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 2px;
+      }
+    }
+  </style>
 </head>
 <body>
-<header style="display: flex; align-items: center;">
-  <div class="language-selector" style="position: relative; margin-left: 0; margin-right: 10px;">
-    <button onclick="toggleLanguageMenu()" 
-            style="background: transparent; border: none; cursor: pointer; padding: 0;">
-      <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
-           alt="Language" 
-           style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
-    </button>
-    <ul id="languageMenu" style="
-        display: none; 
-        position: absolute; 
-        top: 30px; 
-        left: 0; 
-        background: #222; 
-        border-radius: 6px; 
-        list-style: none; 
-        padding: 5px 0; 
-        min-width: 110px; 
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        z-index: 999;">
-      <li><a href="https://naswap.github.io/site/ar/awareness.html" 
-             style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
-      <li><a href="https://naswap.github.io/site/en/awareness.html" 
-             style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
-    </ul>
+
+  <div class="stars"></div>
+
+  <div class="uiverse-loader" data-aos="fade-up">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 
-  <span>Technology Awareness Section</span>
-</header>
+  <h1 data-aos="zoom-in">The department is under development</h1>
+  <p data-aos="fade-up">We are currently developing this section to be ready soon. Thank you for your patience and continued support</p>
+  <p class="quote" data-aos="fade-up" data-aos-delay="200">"Every great start was just an idea in development."</p>
 
 
-  <div class="breadcrumb">
-    <i class="fas fa-home"></i> <a href="https://naswap.github.io/site/en" style="color: #00e0ff; text-decoration: none;">Home</a> »  Technology Awareness
-</div>
-
-  <div class="categories">
-    <button class="tab active" onclick="filterPosts('all', this)"><i class="fas fa-layer-group"></i> All</button>
-    <button class="tab" onclick="filterPosts('facebook', this)"><i class="fab fa-facebook"></i> Facebook</button>
-    <button class="tab" onclick="filterPosts('whatsapp', this)"><i class="fab fa-whatsapp"></i> Whatsapp</button>
-    <button class="tab" onclick="filterPosts('instagram', this)"><i class="fab fa-instagram"></i> instagram</button>
-    <button class="tab" onclick="filterPosts('ai', this)"><i class="fas fa-robot"></i>artificial intelligence</button>
-    <button class="tab" onclick="filterPosts('security', this)"><i class="fas fa-shield-alt"></i>Digital Security
+  <button class="back-btn" onclick="window.location.href = 'https://naswap.github.io/site/en';" data-aos="fade-up" data-aos-delay="600">
+    <span>Back</span>
 </button>
+
+  <div class="footer">
+    <i class="fas fa-circle-n"></i>
+    <span>Naswap</span>
   </div>
 
-  <div id="welcome">
-    <h2>Please choose a category.
-</h2>
-    <p>Click on a topic to view it.
-</p>
-  </div>
-
-  <div class="posts">
-    <div class="post facebook" onclick="openModal(
-      'أحدث تغييرات في خوارزميات فيسبوك',
-      `
-        <p>فيما يلي خطوات لفهم أحدث تغييرات خوارزميات فيسبوك:</p>
-        <ol>
-          <li>قراءة المستندات الرسمية من مركز المطورين.</li>
-          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+1' style='width:100%; border-radius:8px; margin:10px 0;' />
-          <li>تحليل التفاعلات الجديدة وتأثيرها على الظهور.</li>
-          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+2' style='width:100%; border-radius:8px; margin:10px 0;' />
-          <li>تجربة نشر محتوى تجريبي وتحليل النتائج.</li>
-          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+3' style='width:100%; border-radius:8px;' />
-        </ol>
-      `)">
-      <h3>أحدث تغييرات في خوارزميات فيسبوك</h3>
-      <p>مقال تقني حول خوارزميات فيسبوك.</p>
-    </div>
-
-    <div class="post whatsapp" onclick="openModal('طرق حماية حسابك في واتساب', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
-      <h3>طرق حماية حسابك في واتساب</h3>
-      <p>تعرف على أهم الخطوات لتأمين واتساب.</p>
-    </div>
-
-    <div class="post instagram" onclick="openModal('تحليل بيانات انيستاجرام', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
-      <h3>تحليل بيانات انستقرام</h3>
-      <p>كيفية تحليل محتوى انستقرام باستخدام أدوات الذكاء الاصطناعي.</p>
-    </div>
-
-    <div class="post ai" onclick="openModal('أفضل أدوات الذكاء الاصطناعي', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
-      <h3>أفضل أدوات الذكاء الاصطناعي</h3>
-      <p>أدوات مفيدة لتسريع عملك.</p>
-    </div>
-
-    <div class="post security" onclick="openModal('أساسيات الأمن الرقمي', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
-      <h3>أساسيات الأمن الرقمي</h3>
-      <p>حماية بياناتك الشخصية من الاختراقات.</p>
-    </div>
-  </div>
-
-  <div id="modal">
-    <div id="modalContent">
-      <span id="closeIcon" onclick="closeModal()">×</span>
-      <h2 id="modalTitle">عنوان المقال</h2>
-      <p id="modalBody">نص المقال الكامل يظهر هنا عند النقر على أي بطاقة.</p>
-      <button id="closeModal" onclick="closeModal()">إغلاق</button>
-    </div>
-  </div>
-
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // إخفاء رسالة الترحيب بانسيابية بعد ثانيتين
-    window.onload = function () {
-      setTimeout(() => {
-        const welcome = document.getElementById('welcome');
-        if (welcome) {
-          welcome.classList.add('fade-out');
-          setTimeout(() => {
-            welcome.style.display = 'none';
-          }, 1000);
-        }
-      }, 2000);
-    };
-
-    function filterPosts(category, element) {
-      const posts = document.querySelectorAll('.post');
-      posts.forEach(post => {
-        post.style.display = (category === 'all' || post.classList.contains(category)) ? 'block' : 'none';
-      });
-
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      element.classList.add('active');
-    }
-
-    function openModal(title, content) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalBody').innerHTML = content;
-      document.getElementById('modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-function toggleLanguageMenu() {
-    var menu = document.getElementById("languageMenu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-  }
-
-  // إخفاء القائمة عند النقر خارجها
-  document.addEventListener("click", function(e) {
-    var menu = document.getElementById("languageMenu");
-    var button = document.querySelector(".language-selector button");
-    if (!button.contains(e.target) && !menu.contains(e.target)) {
-      menu.style.display = "none";
-    }
-  });
+    AOS.init();
+    console.log("The department is under development...");
   </script>
 </body>
 </html>
-
