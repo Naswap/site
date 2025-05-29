@@ -7,7 +7,7 @@
 
   <title>Artificial intelligence</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
- <link rel="stylesheet" href="css/ai.css" />
+ <link rel="stylesheet" href="https://nassrmualla.wap.sh/en/ai.css" />
 </head>
 <body>
 <header>
@@ -17,7 +17,9 @@
 <div class="language-selector" style="position: relative; margin: 0 5px;">
   <button onclick="toggleLanguageMenu()" 
           style="background: transparent; border: none; cursor: pointer; padding: 0;">
-    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
+
+" 
          alt="Language" 
          style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
   </button>
@@ -33,9 +35,9 @@
       min-width: 110px; 
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       z-index: 999;">
-    <li><a href="ar/Aisec.html" 
+    <li><a href="https://naswap.github.io/site/ar" 
            style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
-    <li><a href="en/Aisec.html" 
+    <li><a href="https://naswap.github.io/site/en/Aisec.html" 
            style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
   </ul>
 </div>
@@ -43,9 +45,9 @@
     <div class="dropdown" style="position: relative;">
   <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <div class="dropdown-content" id="dropdownMenu">
-    <a href="en/About.html">About me</a>
-    <a href="en/contact.html">Contact us</a>
-    <a href="en/privacy.html">Privacy Policy
+    <a href="About.html">About me</a>
+    <a href="contact.html">Contact us</a>
+    <a href="privacy.html">Privacy Policy
 </a>
     <a href="en/contribution.html">Contributions
 </a>
@@ -54,10 +56,10 @@
 </header>
 
 <nav>
-  <a href="en/awareness.html"><i class="fas fa-shield-alt"></i>awareness</a>
+  <a href="en/awareness"><i class="fas fa-shield-alt"></i>awareness</a>
   <a href="en/technews"><i class="fas fa-newspaper"></i>Tech News</a>
-  <a href="en/Aisec.html"><i class="fas fa-brain"></i>Artificial intelligence</a>
-  <a href="en/index.html"><i class="fas fa-home"></i>Home</a>
+  <a href="en/Aisec"><i class="fas fa-brain"></i>Artificial intelligence</a>
+  <a href="https://naswap.github.io/site/en"><i class="fas fa-home"></i>Home</a>
 </nav>
 
 <div class="news-ticker">
@@ -209,7 +211,25 @@
   </div>
 </div>
 
-<script src="js/enaisec.js"></script>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("dropdownMenu");
+  menu.classList.toggle("show");
+}
+  function toggleLanguageMenu() {
+    var menu = document.getElementById("languageMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  // إخفاء القائمة عند النقر خارجها
+  document.addEventListener("click", function(e) {
+    var menu = document.getElementById("languageMenu");
+    var button = document.querySelector(".language-selector button");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
 
 </body>
 </html>
