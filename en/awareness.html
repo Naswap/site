@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology Awareness Section
+</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/awareness.css">
+</head>
+<body>
+<header style="display: flex; align-items: center;">
+  <div class="language-selector" style="position: relative; margin-left: 0; margin-right: 10px;">
+    <button onclick="toggleLanguageMenu()" 
+            style="background: transparent; border: none; cursor: pointer; padding: 0;">
+      <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
+           alt="Language" 
+           style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+    </button>
+    <ul id="languageMenu" style="
+        display: none; 
+        position: absolute; 
+        top: 30px; 
+        left: 0; 
+        background: #222; 
+        border-radius: 6px; 
+        list-style: none; 
+        padding: 5px 0; 
+        min-width: 110px; 
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        z-index: 999;">
+      <li><a href="ar/awareness.html" 
+             style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
+      <li><a href="en/awareness.html" 
+             style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
+    </ul>
+  </div>
+
+  <span>Technology Awareness Section</span>
+</header>
+
+
+  <div class="breadcrumb">
+    <i class="fas fa-home"></i> <a href="en/index.html" style="color: #00e0ff; text-decoration: none;">Home</a> »  Technology Awareness
+</div>
+
+  <div class="categories">
+    <button class="tab active" onclick="filterPosts('all', this)"><i class="fas fa-layer-group"></i> All</button>
+    <button class="tab" onclick="filterPosts('facebook', this)"><i class="fab fa-facebook"></i> Facebook</button>
+    <button class="tab" onclick="filterPosts('whatsapp', this)"><i class="fab fa-whatsapp"></i> Whatsapp</button>
+    <button class="tab" onclick="filterPosts('instagram', this)"><i class="fab fa-instagram"></i> instagram</button>
+    <button class="tab" onclick="filterPosts('ai', this)"><i class="fas fa-robot"></i>artificial intelligence</button>
+    <button class="tab" onclick="filterPosts('security', this)"><i class="fas fa-shield-alt"></i>Digital Security
+</button>
+  </div>
+
+  <div id="welcome">
+    <h2>Please choose a category.
+</h2>
+    <p>Click on a topic to view it.
+</p>
+  </div>
+
+  <div class="posts">
+    <div class="post facebook" onclick="openModal(
+      'أحدث تغييرات في خوارزميات فيسبوك',
+      `
+        <p>فيما يلي خطوات لفهم أحدث تغييرات خوارزميات فيسبوك:</p>
+        <ol>
+          <li>قراءة المستندات الرسمية من مركز المطورين.</li>
+          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+1' style='width:100%; border-radius:8px; margin:10px 0;' />
+          <li>تحليل التفاعلات الجديدة وتأثيرها على الظهور.</li>
+          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+2' style='width:100%; border-radius:8px; margin:10px 0;' />
+          <li>تجربة نشر محتوى تجريبي وتحليل النتائج.</li>
+          <img src='https://via.placeholder.com/500x300?text=Facebook+Step+3' style='width:100%; border-radius:8px;' />
+        </ol>
+      `)">
+      <h3>أحدث تغييرات في خوارزميات فيسبوك</h3>
+      <p>مقال تقني حول خوارزميات فيسبوك.</p>
+    </div>
+
+    <div class="post whatsapp" onclick="openModal('طرق حماية حسابك في واتساب', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
+      <h3>طرق حماية حسابك في واتساب</h3>
+      <p>تعرف على أهم الخطوات لتأمين واتساب.</p>
+    </div>
+
+    <div class="post instagram" onclick="openModal('تحليل بيانات انيستاجرام', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
+      <h3>تحليل بيانات انستقرام</h3>
+      <p>كيفية تحليل محتوى انستقرام باستخدام أدوات الذكاء الاصطناعي.</p>
+    </div>
+
+    <div class="post ai" onclick="openModal('أفضل أدوات الذكاء الاصطناعي', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
+      <h3>أفضل أدوات الذكاء الاصطناعي</h3>
+      <p>أدوات مفيدة لتسريع عملك.</p>
+    </div>
+
+    <div class="post security" onclick="openModal('أساسيات الأمن الرقمي', '<p>سيتم تحديث المحتوى لاحقًا.</p>')">
+      <h3>أساسيات الأمن الرقمي</h3>
+      <p>حماية بياناتك الشخصية من الاختراقات.</p>
+    </div>
+  </div>
+
+  <div id="modal">
+    <div id="modalContent">
+      <span id="closeIcon" onclick="closeModal()">×</span>
+      <h2 id="modalTitle">عنوان المقال</h2>
+      <p id="modalBody">نص المقال الكامل يظهر هنا عند النقر على أي بطاقة.</p>
+      <button id="closeModal" onclick="closeModal()">إغلاق</button>
+    </div>
+  </div>
+
+  <script src="js/enawareness.js"></script>
+</body>
+</html>
+
