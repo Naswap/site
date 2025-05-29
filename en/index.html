@@ -8,7 +8,7 @@
 
   <title>Nassr Z. Mualla website</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
- <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="https://nassrmualla.wap.sh/en/style.css" />
 </head>
 <body>
 <header>
@@ -36,9 +36,9 @@
       min-width: 110px; 
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       z-index: 999;">
-    <li><a href="ar/index.html" 
+    <li><a href="https://naswap.github.io/site" 
            style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
-    <li><a href="en/index.html" 
+    <li><a href="https://naswap.github.io/site/en" 
            style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
   </ul>
 </div>
@@ -47,22 +47,22 @@
     <div class="dropdown" style="position: relative;">
   <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <div class="dropdown-content" id="dropdownMenu">
-    <a href="en/About.html">About me</a>
-    <a href="en/contact.html">Contact us</a>
-    <a href="en/privacy.html">Privacy Policy
+    <a href="About.html">About me</a>
+    <a href="contact.html">Contact us</a>
+    <a href="privacy.html">Privacy Policy
 </a>
-    <a href="/en/contribution.html">Contributions
+    <a href="contribution.html">Contributions
 </a>
   </div>
 </div>
 </header>
 
 <nav>
-  <a href="en/awareness"><i class="fas fa-shield-alt"></i>awareness</a>
-  <a href="en/technews.html"><i class="fas fa-newspaper"></i>Tech News</a>
-  <a href="en/Aisec.html"><i class="fas fa-brain"></i>Artificial intelligence
+  <a href="awareness.html"><i class="fas fa-shield-alt"></i>awareness</a>
+  <a href="technews.html"><i class="fas fa-newspaper"></i>Tech News</a>
+  <a href="Aisec.html"><i class="fas fa-brain"></i>Artificial intelligence
 </a>
-  <a href="en/index.html"><i class="fas fa-home"></i>Home
+  <a href="https://naswap.github.io/site/en"><i class="fas fa-home"></i>Home
 </a>
 </nav>
 
@@ -82,19 +82,19 @@
 
 <section class="section-cards">
   <div class="cards-container">
-    <div class="card" onclick="location.href='en/Aisec.html'">
+    <div class="card" onclick="location.href='Aisec.html'">
       <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="الذكاء الاصطناعي" />
       <h3>artificial intelligence</h3>
       <p>Top AI Tools and Websites
 </p>
     </div>
-    <div class="card" onclick="location.href='en/technews.html'">
+    <div class="card" onclick="location.href='technews.html'">
       <img src="https://nassrmualla.wap.sh/images/nasicon.png" alt="أخبار تقنية" />
       <h3>Tech news</h3>
       <p>Latest Tech News from Trusted Sources
 </p>
     </div>
-    <div class="card" onclick="location.href='en/awareness.html'">
+    <div class="card" onclick="location.href='awareness.html'">
       <img src="https://cdn-icons-png.flaticon.com/512/4280/4280051.png" alt="التوعية الرقمية" />
       <h3>awareness</h3>
       <p>Tips and Information to Protect You in the Digital World and Enhance Your Technological Awareness
@@ -124,7 +124,25 @@
     <a href="https://t.me/nassr_z_mualla" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
   </div>
 </div>
-<script src="js/enindex.js"></script>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("dropdownMenu");
+  menu.classList.toggle("show");
+}
+function toggleLanguageMenu() {
+    var menu = document.getElementById("languageMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  // إخفاء القائمة عند النقر خارجها
+  document.addEventListener("click", function(e) {
+    var menu = document.getElementById("languageMenu");
+    var button = document.querySelector(".language-selector button");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
 </body>
 </html>
 
