@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="الموقع التقني الشخصي للخبير التقني نصر معلا — أخبار تقنية، أدوات ذكاء اصطناعي، ومواد توعوية رقمية باللغة العربية.">
+
+  <title>موقع نصر معلا</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+ <link rel="stylesheet" href="css/1style.css" />
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo">Nassr Z. Mualla</div>
+<!-- زر تغيير اللغة -->
+<div class="language-selector" style="position: relative; margin: 0 5px;">
+  <button onclick="toggleLanguageMenu()" 
+          style="background: transparent; border: none; cursor: pointer; padding: 0;">
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
+
+" 
+         alt="Language" 
+         style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+  </button>
+  <ul id="languageMenu" style="
+      display: none; 
+      position: absolute; 
+      top: 30px; 
+      left: 0; 
+      background: #222; 
+      border-radius: 6px; 
+      list-style: none; 
+      padding: 5px 0; 
+      min-width: 110px; 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 999;">
+    <li><a href="ar/index.html" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
+    <li><a href="en/index.html" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
+  </ul>
+</div>
+    <div class="dropdown" style="position: relative;">
+  <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <div class="dropdown-content" id="dropdownMenu">
+    <a href="ar/About.html">من أنا</a>
+    <a href="ar/contact.html">تواصل معنا</a>
+    <a href="ar/privacy.html">سياسة الخصوصية</a>
+    <a href="ar/contribution.html">المساهمات</a>
+  </div>
+</div>
+</header>
+
+<nav>
+  <a href="ar/index.html"><i class="fas fa-home"></i> الرئيسية</a>
+  <a href="ar/Aisec.html"><i class="fas fa-brain"></i> الذكاء الاصطناعي</a>
+  <a href="ar/technews.html"><i class="fas fa-newspaper"></i> اخبار تقنية</a>
+  <a href="ar/awareness.html"><i class="fas fa-shield-alt"></i> التوعية التقنية</a>
+</nav>
+
+<div class="news-ticker">
+  <i class="fas fa-bolt"></i>
+  <div class="news-scroll">
+    <div class="scroll-content">
+      <span>تم اضافة 12 أداة ذكاء اصطناعي متنوعة في قسم الذكاء الاصطناعي•••🔵•••</span>
+      <span>اصبح قسم الاخبار التقنية قائماً بذاته و ينشر آخر الاخبار التقنية من ٣ مصادر عربية موثوقة•••🔵•••</span>
+      <span>سيتم اضافة تصنيف جديد لقسم الذكاء الاصطناعي متخصص بكشف التزييف او المعلومات المضللة التي تم انشائها باستخدام الذكاء الاصطناعي•••🔵•••</span>
+      <span>نتلقى اقتراحاتكم و رسائلكم عبر قسم "تواصل معنا في زر القائمة المنسدلة بجانب شعار الموقع في الاعلى•••🔵•••</span>
+     <span>تم تطوير قسم التوعية التقنية بـ5 تصنيفات مختلفة على وسائل التواصل الاجتماعي و توضيح طرق الحماية من المخاطر•••🔵•••</span>
+ <span>يرجى الاطلاع على سياسة الخصوصية في القائمة المنسدلة الى جانب شعار الموقع</span>
+    </div>
+  </div>
+</div>
+
+<section class="section-cards">
+  <div class="cards-container">
+    <div class="card" onclick="location.href='ar/Aisec.html'">
+      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="الذكاء الاصطناعي" />
+      <h3>الذكاء الاصطناعي</h3>
+      <p>أهم مواقع و ادوات الذكاء الاصطناعي</p>
+    </div>
+    <div class="card" onclick="location.href='ar/technews.html'">
+      <img src="https://nassrmualla.wap.sh/images/nasicon.png" alt="أخبار تقنية" />
+      <h3>أخبار تقنية</h3>
+      <p>آخر الاخبار التقنية من مصادر عربية موثوقة</p>
+    </div>
+    <div class="card" onclick="location.href='ar/awareness.html'">
+      <img src="https://cdn-icons-png.flaticon.com/512/4280/4280051.png" alt="التوعية الرقمية" />
+      <h3>التوعية الرقمية</h3>
+      <p>نصائح ومعلومات لحمايتك في العالم الرقمي وتعزيز وعيك التكنولوجي.</p>
+    </div>
+  </div>
+</section>
+<!-- البطاقات الزجاجية في الأسفل -->
+<div class="glass-footer-cards">
+  <div class="glass-card" data-link="ar/tbots.html"> 
+    <i class="fab fa-telegram-plane"></i>
+    <div class="glass-card-title">بوتات تيليغرام</div>
+    <div class="loader"></div>
+  </div>
+
+  <div class="glass-card" data-link="ar/sitedir.html"> 
+    <i class="fas fa-globe"></i>
+    <div class="glass-card-title">دليل مواقع</div>
+    <div class="loader"></div>
+  </div>
+
+  <div class="glass-card" data-link="ar/notification.html"> 
+    <i class="fas fa-bell"></i>
+    <div class="glass-card-title">تلقي اشعارات</div>
+    <div class="loader"></div>
+  </div>
+</div>
+<!-- قسم تحميل التطبيق -->
+<section style="background-color: #111; color: #f0f0f0; padding: 30px 20px; text-align: center; border-top: 1px solid #333;">
+  <h3 style="margin-bottom: 10px; font-size: 1.1em;">حمّل تطبيق الموقع الرسمي</h3>
+  <p style="margin-bottom: 20px; font-size: 0.5em;">استمتع بتجربة أسرع وأكثر سلاسة على هاتفك المحمول.</p>
+  <!-- From Uiverse.io by satyamchaudharydev -->
+<center><button class="button">
+    <span class="button_lg">
+        <span class="button_sl"></span>
+        <span class="button_text">Download Now</span>
+    </span>
+</button></center>
+</section>
+
+<!-- new footer -->
+<div class="modern-footer">
+  <p>جميع الحقوق محفوظة &copy; 2025</p>
+  <div class="social-icons">
+    <a href="https://facebook.com/nassr.z.mualla" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com/nassr.z.mualla" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/nassr_z_mualla" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+  </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>
