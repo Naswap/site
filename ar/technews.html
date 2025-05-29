@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="قسم الاخبار التقنية">
+
+  <title>قسم الاخبار التقنية</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link rel="stylesheet" href="https://nassrmualla.wap.sh/css/tech.css" />
+  
+<link rel="icon" href="https://nassrmualla.wap.sh/images/nasicon.png" type="image/png">
+</head>
+
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">Nassr Z. Mualla</div>
+<!-- زر تغيير اللغة -->
+<div class="language-selector" style="position: relative; margin: 0 5px;">
+  <button onclick="toggleLanguageMenu()" 
+          style="background: transparent; border: none; cursor: pointer; padding: 0;">
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
+
+" 
+         alt="Language" 
+         style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+  </button>
+  <ul id="languageMenu" style="
+      display: none; 
+      position: absolute; 
+      top: 30px; 
+      left: 0; 
+      background: #222; 
+      border-radius: 6px; 
+      list-style: none; 
+      padding: 5px 0; 
+      min-width: 110px; 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 999;">
+    <li><a href="https://nassrmualla.wap.sh/ar" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
+    <li><a href="https://nassrmualla.wap.sh/en/technews" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
+  </ul>
+</div>
+    <div class="dropdown" style="position: relative;">
+      <button class="dropdown-btn" onclick="toggleMenu()" id="dropdownBtn"><i class="fas fa-bars"></i></button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="https://nassrmualla.wap.sh/ar/About">من أنا</a>
+        <a href="https://nassrmualla.wap.sh/ar/contact">تواصل معنا</a>
+        <a href="https://nassrmualla.wap.sh/ar/privacy">سياسة الخصوصية</a>
+        <a href="/ar/contribution">المساهمات</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="https://nassrmualla.wap.sh/ar"><i class="fas fa-home"></i> الرئيسية</a>
+  <a href="https://nassrmualla.wap.sh/ar/Aisec"><i class="fas fa-brain"></i> الذكاء الاصطناعي</a>
+  <a href="https://nassrmualla.wap.sh/ar/technews"><i class="fas fa-newspaper"></i> اخبار تقنية</a>
+  <a href="https://nassrmualla.wap.sh/ar/awareness"><i class="fas fa-shield-alt"></i> التوعية التقنية</a>
+</nav>
+
+<div class="news-ticker">
+  <i class="fas fa-bolt"></i>
+  <div class="news-scroll">
+ <div class="scroll-content">
+      <span>تم اضافة 12 أداة ذكاء اصطناعي متنوعة في قسم الذكاء الاصطناعي•••🔵•••</span>
+      <span>اصبح قسم الاخبار التقنية قائماً بذاته و ينشر آخر الاخبار التقنية من ٣ مصادر عربية موثوقة•••🔵•••</span>
+      <span>سيتم اضافة تصنيف جديد لقسم الذكاء الاصطناعي متخصص بكشف التزييف او المعلومات المضللة التي تم انشائها باستخدام الذكاء الاصطناعي•••🔵•••</span>
+      <span>نتلقى اقتراحاتكم و رسائلكم عبر قسم "تواصل معنا في زر القائمة المنسدلة بجانب شعار الموقع في الاعلى•••🔵•••</span>
+      <span>يرجى الاطلاع على سياسة الخصوصية في القائمة المنسدلة الى جانب شعار الموقع</span>
+    </div>
+  </div>
+</div>
+
+<section class="tech-news-section">
+  <div id="loading-message" style="text-align:center; font-weight:bold; padding: 20px;">جاري تحميل الأخبار...</div>
+  <div id="news" class="news-container"></div>
+</section>
+
+<div class="modern-footer">
+  <p>جميع الحقوق محفوظة &copy; 2025</p>
+  <div class="social-icons">
+    <a href="https://facebook.com/nassr.z.mualla" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com/nassr.z.mualla" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/nassr_z_mualla" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.classList.toggle("show");
+  }
+
+  const sources = [
+    'https://api.rss2json.com/v1/api.json?rss_url=https://aitnews.com/feed',
+    'https://api.rss2json.com/v1/api.json?rss_url=https://www.tech-wd.com/wd/feed',
+    'https://api.rss2json.com/v1/api.json?rss_url=https://www.aljazeera.net/xml/rss/science.xml'
+  ];
+
+  const allItems = [];
+
+  Promise.all(sources.map(src => fetch(src).then(res => res.json())))
+    .then(results => {
+      results.forEach(data => {
+        if (data.items) {
+          allItems.push(...data.items.slice(0, 10));
+        }
+      });
+
+      allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+      const newsContainer = document.getElementById('news');
+
+document.getElementById('loading-message').style.display = 'none';
+
+      allItems.slice(0, 15).forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit">
+            <img src="${item.thumbnail || 'https://via.placeholder.com/300x200'}" alt="صورة الخبر" />
+            <div class="news-content">
+              <h3>${item.title}</h3>
+              <p>${item.description.slice(0, 80)}...</p>
+            </div>
+          </a>
+        `;
+        newsContainer.appendChild(card);
+      });
+    });
+
+  window.addEventListener('click', function(e) {
+    const menu = document.getElementById('dropdownMenu');
+    const btn = document.getElementById('dropdownBtn');
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+function toggleLanguageMenu() {
+    var menu = document.getElementById("languageMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  // إخفاء القائمة عند النقر خارجها
+  document.addEventListener("click", function(e) {
+    var menu = document.getElementById("languageMenu");
+    var button = document.querySelector(".language-selector button");
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
+
+</body>
+</html>
