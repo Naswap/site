@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="قسم الذكاء الاصطناعي">
+  <title>قسم الذكاء الاصطناعي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="css/ai.css"/>
+  <link rel="icon" href="https://nassrmualla.wap.sh/images/nasicon.png" type="image/png">
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">Nassr Z. Mualla</div>
+<!-- زر تغيير اللغة -->
+<div class="language-selector" style="position: relative; margin: 0 5px;">
+  <button onclick="toggleLanguageMenu()" 
+          style="background: transparent; border: none; cursor: pointer; padding: 0;">
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
+         alt="Language" 
+         style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+  </button>
+  <ul id="languageMenu" style="
+      display: none; 
+      position: absolute; 
+      top: 30px; 
+      left: 0; 
+      background: #222; 
+      border-radius: 6px; 
+      list-style: none; 
+      padding: 5px 0; 
+      min-width: 110px; 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 999;">
+    <li><a href="https://nassrmualla.wap.sh/ar/Aisec" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
+    <li><a href="https://nassrmualla.wap.sh/en/Aisec" 
+           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
+  </ul>
+</div>
+    <div style="position: relative;">
+      <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="ar/About.html">من أنا</a>
+        <a href="ar/contact.html">تواصل معنا</a>
+        <a href="ar/privacy.html">سياسة الخصوصية</a>
+        <a href="ar/contribution.html">المساهمات</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="ar.html"><i class="fas fa-home"></i> الرئيسية</a>
+  <a href="ar/Aisec.html"><i class="fas fa-brain"></i> الذكاء الاصطناعي</a>
+  <a href="ar/technews.html"><i class="fas fa-newspaper"></i> اخبار تقنية</a>
+  <a href="ar/awareness.html"><i class="fas fa-shield-alt"></i> التوعية التقنية</a>
+</nav>
+
+<div class="news-ticker">
+  <i class="fas fa-bolt"></i>
+  <div class="news-scroll">
+    <div class="scroll-content">
+      <span>تم اضافة 12 أداة ذكاء اصطناعي متنوعة في قسم الذكاء الاصطناعي•••🔵•••</span>
+      <span>اصبح قسم الاخبار التقنية قائماً بذاته و ينشر آخر الاخبار التقنية من ٣ مصادر عربية موثوقة•••🔵•••</span>
+      <span>سيتم اضافة تصنيف جديد لقسم الذكاء الاصطناعي متخصص بكشف التزييف او المعلومات المضللة التي تم انشائها باستخدام الذكاء الاصطناعي•••🔵•••</span>
+      <span>نتلقى اقتراحاتكم و رسائلكم عبر قسم "تواصل معنا في زر القائمة المنسدلة بجانب شعار الموقع في الاعلى•••🔵•••</span>
+      <span>يرجى الاطلاع على سياسة الخصوصية في القائمة المنسدلة الى جانب شعار الموقع</span>
+    </div>
+  </div>
+</div>
+
+<!-- منطقة المستطيل تحت  شريط الأخبار -->
+<div class="category-trigger-box">
+  <!-- النص جهة اليمين -->
+  <span>تستطيع اختيار فئة من القائمة</span>
+  <!-- الزر جهة اليسار -->
+  <button class="category-toggle" onclick="toggleCategories()">☰ الفئات</button>
+
+  <!-- شريط الفئات الطابقي -->
+  <div class="category-grid" id="categoryDropdown">
+    <div class="category-row">
+      <div class="category-item" onclick="showTools('writing')"><i class="fas fa-pen"></i> كتابة</div>
+      <div class="divider vertical"></div>
+      <div class="category-item" onclick="showTools('design')"><i class="fas fa-paint-brush"></i> تصميم</div>
+      <div class="divider vertical"></div>
+      <div class="category-item" onclick="showTools('video')"><i class="fas fa-video"></i> فيديو</div>
+    </div>
+    <div class="divider horizontal"></div>
+    <div class="category-row">
+      <div class="category-item" onclick="showTools('audio')"><i class="fas fa-microphone"></i> صوت</div>
+      <div class="divider vertical"></div>
+      <div class="category-item" onclick="showTools('education')"><i class="fas fa-book-open"></i> تعليم</div>
+      <div class="divider vertical"></div>
+      <div class="category-item" onclick="showTools('deepfake')"><i class="fas fa-eye-slash"></i> كشف تزييف</div>
+    </div>
+  </div>
+</div>
+
+<!-- منطقة عرض الأدوات -->
+<div class="tools-display" id="toolsDisplay">
+  <div class="default-message">
+    <h3>اختر تصنيفًا من القائمة</h3>
+    <p>لعرض الأدوات المتعلقة بالتصنيف الذي تريده.</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="modern-footer">
+  <p>جميع الحقوق محفوظة &copy; 2025</p>
+  <div class="social-icons">
+    <a href="https://facebook.com/nassr.z.mualla " target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com/nassr.z.mualla " target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/nassr_z_mualla " target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+  </div>
+</div>
+<script src="js/aisec.js"></script>
+</body>
+</html>

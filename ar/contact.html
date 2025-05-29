@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تواصل معنا</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/contact.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <main>
+    <header>تواصل معنا</header>
+
+    <div class="card">
+      <h2>يرجى أخذ العلم :</h2>
+      <ul class="info-notes">
+        <li>يجب إدخال الاسم الكامل لتسهيل التواصل.</li>
+        <li>استخدام بريد إلكتروني فعّال للرد على استفسارك.</li>
+        <li>اكتب رسالتك بوضوح مع ذكر التفاصيل المهمة.</li>
+        <li>لا يتم حفظ المعلومات المدخلة في قاعدة بيانات.</li>
+        <li>سيتم الرد عليك خلال 48 ساعة.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <form id="contact-form" method="POST" novalidate>
+        <div>
+          <label for="name">الاسم:</label>
+          <input type="text" id="name" name="name" required>
+          <div class="error" id="name-error"></div>
+        </div>
+        <div>
+          <label for="email">البريد الإلكتروني:</label>
+          <input type="email" id="email" name="email" required>
+          <div class="error" id="email-error"></div>
+        </div>
+        <div>
+          <label for="message">الرسالة:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <div class="error" id="message-error"></div>
+        </div>
+
+        <div class="g-recaptcha" data-sitekey="6Ld0bkkrAAAAAOophwCx3WeBlGwnqOzasKayDmjZ"></div>
+        <div style="display: flex; gap: 10px; justify-content: flex-start;">
+  <button type="submit">إرسال</button>
+  <a href="https://nassrmualla.wap.sh/ar" style="background-color: #e53935; color: #fff; padding: 14px 20px; border-radius: 6px; text-decoration: none; font-size: 16px; display: flex; align-items: center; justify-content: center; height: 48px;">
+    إلغاء
+  </a>
+</div>
+</div>
+
+      </form>
+      <div class="success-message" id="success-message">تم إرسال رسالتك بنجاح. سنرد عليك قريبًا.</div>
+    </div>
+  </main>
+  <script src="js/contact.js"></script>
+  </script>
+</body>
+</html>
