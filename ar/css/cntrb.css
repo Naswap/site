@@ -1,0 +1,97 @@
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #f9f9f9;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+      background-size: cover;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #00aaff;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    .contributions {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .contributions p {
+      font-size: 1rem;
+      color: #dcdcdc;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      background-color: #1e1e1e;
+      margin: 15px 0;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    ul li:hover {
+      transform: translateX(-5px);
+    }
+
+    ul li i {
+      color: #00aaff;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin: 40px auto;
+      padding: 10px 20px;
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: background-color 0.3s, transform 0.3s;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background-color: #008ecc;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .contributions {
+        padding: 10px;
+      }
+
+      ul li {
+        font-size: 0.9rem;
+      }
+    }
