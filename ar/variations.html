@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gmail Variations - Naswap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/variations.css" />
+  
+</head>
+<body>
+
+<header>
+  <h1>Gmail Variations</h1>
+  <a href="https://nassrmualla.wap.sh">رجوع</a>
+</header>
+
+
+<p>هي أداة ذكية تتيح لك إنشاء عدد هائل من التنويعات</p>
+<p>دون أن يؤثر ذلك على بريدك الالكتروني</p>
+<p>تستطيع استخدامها لانشاء حسابات متعددة بنفس الايميل</p>
+
+<div class="container">
+  <input type="text" id="email" placeholder="أدخل بريد Gmail">
+  <button onclick="generateVariations()">توليد التنويعات</button>
+  <div id="alert" class="alert"></div>
+  <div id="results" class="results"></div>
+  <div id="count" class="count"></div>
+
+  <div class="actions">
+    <button onclick="copyAll()">نسخ الكل</button>
+    <button onclick="resetAll()">مسح</button>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 - تصميم <strong>Naswap</strong>
+</footer>
+
+<script>
+function generateVariations() {
+  const emailInput = document.getElementById('email');
+  const alertBox = document.getElementById('alert');
+  const resultsBox = document.getElementById('results');
+  const countBox = document.getElementById('count');
+
+  const email = emailInput.value.trim().toLowerCase();
+
+  alertBox.innerHTML = '';
+  resultsBox.innerHTML = '';
+  countBox.innerHTML = '';
+
+  if (!email.includes('@gmail.com')) {
+    alertBox.textContent = 'يرجى إدخال بريد Gmail صالح مثل example@gmail.com';
+    return;
+  }
+
+  const username = email.split('@')[0];
+  const domain = '@gmail.com';
+
+  const positions = username.length - 1;
+  const variations = [];
+
+  for (let i = 0; i < Math.pow(2, positions); i++) {
+    let binary = i.toString(2).padStart(positions, '0');
+    let variation = '';
+
+    for (let j = 0; j < username.length; j++) {
+      variation += username[j];
+      if (j < username.length - 1 && binary[j] === '1') {
+        variation += '.';
+      }
+    }
+    variations.push(variation + domain);
+  }
+
+  const uniqueVariations = [...new Set(variations)];
+
+  uniqueVariations.forEach(v => {
+    const span = document.createElement('span');
+    span.textContent = v;
+    resultsBox.appendChild(span);
+  });
+
+  countBox.textContent = `عدد التنويعات: ${uniqueVariations.length}`;
+}
+
+function copyAll() {
+  const results = document.getElementById('results');
+  const text = Array.from(results.querySelectorAll('span')).map(s => s.textContent).join('\n');
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert('تم نسخ التنويعات!');
+  });
+}
+
+function resetAll() {
+  document.getElementById('email').value = '';
+  document.getElementById('alert').innerHTML = '';
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('count').innerHTML = '';
+}
+</script>
+
+</body>
+</html>
