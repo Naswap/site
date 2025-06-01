@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WHOIS</title>
+  <link rel="stylesheet" href="css/whois.css" />
+</head>
+<body>
+  <header>
+<a href="https://nassrmualla.wap.sh">رجوع</a>
+  <h1>Whois Tool</h1>
+</header>
+
+<div class="whois-card">
+  <h2>🔍 أداة Whois Tool</h2>
+  <ul>
+    <li>توفر لك معلومات كاملة حول أي نطاق (Domain) تقوم بإدخاله.</li>
+    <li>تعرض بيانات تسجيل النطاق وتاريخ إنشائه وانتهائه.</li>
+    <li>تكشف الجهة المسجلة للنطاق ومزود الخدمة (Registrar).</li>
+    <li>تعرض أسماء خوادم DNS المستخدمة من قبل الموقع.</li>
+    <li>تفيد في التحقق من مصداقية المواقع قبل التعامل معها.</li>
+    <li>تستخدم خدمة API موثوقة لجلب البيانات من مصادرها.</li>
+    <li>توفر خيار نسخ النتائج بسهولة للمشاركة أو الحفظ.</li>
+  </ul>
+</div>
+
+
+  <!-- نموذج الاستعلام -->
+  <div class="container">
+    <input type="text" id="domainInput" placeholder="أدخل اسم النطاق (example.com)">
+    <button onclick="showPopup()">🔍 استعلام</button>
+  </div>
+
+  <!-- نافذة منبثقة -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="popup">
+    <h2>🔎 نتائج WHOIS</h2>
+    <div class="whois-info" id="whoisData">جارٍ التحميل...</div>
+    <button class="copy-btn" onclick="copyResults()">📋 نسخ النتائج</button>
+    <button class="close-btn" onclick="closePopup()">❌ إغلاق</button>
+  </div>
+
+  <script>
+    async function showPopup() {
+      const domain = document.getElementById("domainInput").value.trim();
+      if (!domain) return alert("يرجى إدخال اسم النطاق");
+
+      document.getElementById("whoisData").innerHTML = "⏳ جاري جلب البيانات...";
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+
+      try {
+        const response = await fetch(`https://api.api-ninjas.com/v1/whois?domain=${domain}`, {
+          headers: { 'X-Api-Key': '4TeM9K4bL5izQEwQs7GOWA==VA8KQPg4mspIl9ww' }
+        });
+
+        if (!response.ok) throw new Error("فشل في جلب البيانات");
+
+        const data = await response.json();
+
+        document.getElementById("whoisData").innerHTML = `
+          <p>🌐 <strong>النطاق:</strong> ${data.domain_name || domain}</p>
+          <p>🗓️ <strong>تاريخ التسجيل:</strong> ${data.creation_date || "غير متوفر"}</p>
+          <p>⏳ <strong>تاريخ الانتهاء:</strong> ${data.expiration_date || "غير متوفر"}</p>
+          <p>🏢 <strong>الجهة المسجلة:</strong> ${data.registrar || "غير متوفر"}</p>
+          <p>🧑‍💼 <strong>المالك:</strong> ${data.registrant_name || "محجوب"}</p>
+          <p>📧 <strong>البريد:</strong> ${data.registrant_email || "محجوب"}</p>
+          <p>🖥️ <strong>DNS:</strong> ${data.name_servers ? data.name_servers.join("<br>") : "غير متوفر"}</p>
+          <p>🔒 <strong>الحالة:</strong> ${data.status || "غير متوفر"}</p>
+        `;
+      } catch (error) {
+        document.getElementById("whoisData").innerHTML = `<p>❌ فشل في تحميل البيانات. تأكد من اسم النطاق أو المفتاح.</p>`;
+      }
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    function copyResults() {
+      const text = document.getElementById("whoisData").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ تم نسخ النتائج");
+      }).catch(() => {
+        alert("❌ فشل النسخ");
+      });
+    }
+  </script>
+
+</body>
+</html>
