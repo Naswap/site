@@ -139,7 +139,6 @@ nav a:hover {
   font-size: 1rem;
 }
 
-/* شريط الأخبار */
 .news-ticker {
   background-color: #222;
   color: #fff;
@@ -182,8 +181,7 @@ nav a:hover {
     transform: translateX(100%);
   }
 }
-
-/* بطاقات الأقسام */
+   
 .section-cards {
   padding: 40px 20px;
   background-color: #1e1e1e;
@@ -230,7 +228,6 @@ nav a:hover {
   line-height: 1.5;
 }
 
-/* الفوتر العصري */
 .modern-footer {
   margin-top: 60px;
   padding: 20px 10px;
@@ -394,7 +391,7 @@ img[src*="xtgem"] {
   background-color: #fff;
 }
 
-    /* حاوية البطاقات في الأسفل */
+  
     .glass-footer-cards {
       display: flex;
       justify-content: center;
@@ -406,7 +403,7 @@ img[src*="xtgem"] {
       box-sizing: border-box;
     }
 
-    /* تصميم كل بطاقة - اسم جديد */
+  
     .glass-card {
       position: relative;
       width: 100px;
@@ -432,7 +429,7 @@ img[src*="xtgem"] {
       box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
     }
 
-    /* تأثير التوهج الأبيض الشفاف */
+    
     .glass-card::before {
       content: '';
       position: absolute;
@@ -447,7 +444,7 @@ img[src*="xtgem"] {
       z-index: 0;
     }
 
-    /* زيادة التوهج عند الضغط */
+    
     .glass-card:active::before {
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
     }
@@ -469,7 +466,7 @@ img[src*="xtgem"] {
       z-index: 1;
     }
 
-    /* مؤشر التحميل */
+    
     .loader {
       position: absolute;
       top: 50%;
@@ -489,7 +486,7 @@ img[src*="xtgem"] {
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-/*  تجربة زر جانبي */
+
 .toggle-btn {
       background-color: #333;
       color: white;
@@ -505,8 +502,8 @@ img[src*="xtgem"] {
   position: fixed;
   top: 175px;
   bottom: 0px;
-  right: -180px; /* كان -260px */
-  width: 180px;  /* كان 240px */
+  right: -180px;
+  width: 180px;
   background-color: #1e1e1e;
   overflow-y: auto;
   box-shadow: -2px 0 5px rgba(0,0,0,0.5);
@@ -547,7 +544,6 @@ img[src*="xtgem"] {
     }
 
 
-    /* Overlay */
     .overlay {
       display: none;
       position: fixed;
@@ -581,13 +577,11 @@ img[src*="xtgem"] {
 <header>
   <div class="header-content">
     <div class="logo">Nassr Z. Mualla</div>
-<!-- زر تغيير اللغة -->
+
 <div class="language-selector" style="position: relative; margin: 0 5px;">
   <button onclick="toggleLanguageMenu()" 
           style="background: transparent; border: none; cursor: pointer; padding: 0;">
-    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
-
-" 
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
          alt="Language" 
          style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
   </button>
@@ -675,7 +669,6 @@ img[src*="xtgem"] {
     </div>
   </div>
 </section>
-<!-- البطاقات الزجاجية في الأسفل -->
 <div class="glass-footer-cards">
   <div class="glass-card" data-link="https://nassrmualla.wap.sh/ar/tbots"> 
     <i class="fab fa-telegram-plane"></i>
@@ -695,11 +688,10 @@ img[src*="xtgem"] {
     <div class="loader"></div>
   </div>
 </div>
-<!-- قسم تحميل التطبيق -->
 <section style="background-color: #111; color: #f0f0f0; padding: 30px 20px; text-align: center; border-top: 1px solid #333;">
   <h3 style="margin-bottom: 10px; font-size: 1.1em;">حمّل تطبيق الموقع الرسمي</h3>
   <p style="margin-bottom: 20px; font-size: 0.5em;">استمتع بتجربة أسرع وأكثر سلاسة على هاتفك المحمول.</p>
-  <!-- From Uiverse.io by satyamchaudharydev -->
+  
 <center><button class="button">
     <span class="button_lg">
         <span class="button_sl"></span>
@@ -708,7 +700,6 @@ img[src*="xtgem"] {
 </button></center>
 </section>
 
-<!-- new footer -->
 <div class="modern-footer">
   <p>جميع الحقوق محفوظة &copy; 2025</p>
   <div class="social-icons">
@@ -728,7 +719,6 @@ function toggleMenu() {
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
 
-  // إخفاء القائمة عند النقر خارجها
   document.addEventListener("click", function(e) {
     var menu = document.getElementById("languageMenu");
     var button = document.querySelector(".language-selector button");
@@ -737,25 +727,22 @@ function toggleMenu() {
     }
   });
 document.querySelector(".button").addEventListener("click", function(event) {
-        event.preventDefault(); // منع السلوك الافتراضي للزر
+        event.preventDefault();
 
         setTimeout(function() {
             window.location.href = "https://www.raed.net/download?fileid=1338851";
-        }, 1000); // تحديد الفاصل الزمني (1000 مللي ثانية = ثانية واحدة)
+        }, 1000);
     });
 document.querySelectorAll('.glass-card').forEach(card => {
     card.addEventListener('click', function () {
       const loader = this.querySelector('.loader');
       const link = this.getAttribute('data-link');
 
-      // إظهار مؤشر التحميل
       loader.style.display = 'block';
-
-      // إخفاء الأيقونة والنص أثناء التحميل
+      
       this.querySelector('i').style.opacity = '0';
       this.querySelector('.glass-card-title').style.opacity = '0';
 
-      // إخفاء المؤشر وفتح الرابط بعد 1 ثانية
       setTimeout(() => {
         loader.style.display = 'none';
         this.querySelector('i').style.opacity = '1';
@@ -773,7 +760,6 @@ const sidebar = document.getElementById("sidebar");
       overlay.classList.toggle("active");
     }
 
-    // إغلاق القائمة عند الضغط على رابط
     const links = sidebar.querySelectorAll("a");
     links.forEach(link => {
       link.addEventListener("click", () => {
