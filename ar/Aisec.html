@@ -14,13 +14,11 @@
 <header>
   <div class="header-content">
     <div class="logo">Nassr Z. Mualla</div>
-<!-- زر تغيير اللغة -->
+
 <div class="language-selector" style="position: relative; margin: 0 5px;">
   <button onclick="toggleLanguageMenu()" 
           style="background: transparent; border: none; cursor: pointer; padding: 0;">
-    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
-
-" 
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
          alt="Language" 
          style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
   </button>
@@ -74,14 +72,10 @@
   </div>
 </div>
 
-<!-- منطقة المستطيل الجديد تحت شريط الأخبار -->
 <div class="category-trigger-box">
-  <!-- النص جهة اليمين -->
   <span>تستطيع اختيار فئة من القائمة</span>
-  <!-- الزر جهة اليسار -->
   <button class="category-toggle" onclick="toggleCategories()">☰ الفئات</button>
-
-  <!-- شريط الفئات الطابقي -->
+  
   <div class="category-grid" id="categoryDropdown">
     <div class="category-row">
       <div class="category-item" onclick="showTools('writing')"><i class="fas fa-pen"></i> كتابة</div>
@@ -101,7 +95,6 @@
   </div>
 </div>
 
-<!-- منطقة عرض الأدوات -->
 <div class="tools-display" id="toolsDisplay">
   <div class="default-message">
     <h3>اختر تصنيفًا من القائمة</h3>
@@ -109,7 +102,6 @@
   </div>
 </div>
 
-<!-- Footer -->
 <div class="modern-footer">
   <p>جميع الحقوق محفوظة &copy; 2025</p>
   <div class="social-icons">
@@ -130,7 +122,6 @@ function toggleCategories() {
   dropdown.classList.toggle("open");
 }
 
-// بيانات الأدوات
 const toolsData = {
   writing: [
     { name: "ChatGPT", desc: "مساعد ذكي يكتب مقالات ويجيب على الأسئلة.", link: "https://chat.openai.com ", img: "https://nassrmualla.wap.sh/images/aitool.png " },
@@ -181,13 +172,11 @@ function showTools(category) {
   html += '</div>';
   display.innerHTML = html;
 
-  // إغلاق القائمة بعد الاختيار
   document.getElementById("categoryDropdown").classList.remove("open");
 }
 </script>
 
 <style>
-/* تنسيقات منطقة الزر والفئات */
 .category-trigger-box {
   background-color: #2b2b2b;
   padding: 12px 15px;
@@ -223,7 +212,6 @@ function showTools(category) {
   background-color: #0056b3;
 }
 
-/* شريط الفئات - منظم على طابقين */
 .category-grid {
   position: absolute;
   top: 45px;
@@ -263,7 +251,6 @@ function showTools(category) {
   border-radius: 4px;
 }
 
-/* الخطوط الفاصلة بين الفئات */
 .divider.vertical {
   width: 1px;
   height: 20px;
@@ -276,7 +263,6 @@ function showTools(category) {
   margin: 4px 0;
 }
 
-/* منطقة عرض الأدوات */
 .tools-display {
   margin: 20px 10px 80px 10px;
 }
@@ -289,7 +275,6 @@ function showTools(category) {
   border-radius: 8px;
 }
 
-/* شبكة الأدوات */
 .tools-grid {
   display: flex;
   flex-wrap: wrap;
@@ -375,7 +360,6 @@ function showTools(category) {
   }
 }
 
-/* ضمان ظهور الفوتر في الأسفل */
 body {
   min-height: 100vh;
   display: flex;
@@ -408,7 +392,6 @@ function toggleLanguageMenu() {
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
 
-  // إخفاء القائمة عند النقر خارجها
   document.addEventListener("click", function(e) {
     var menu = document.getElementById("languageMenu");
     var button = document.querySelector(".language-selector button");
