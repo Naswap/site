@@ -17,13 +17,10 @@
 <header>
   <div class="header-content">
     <div class="logo">Nassr Z. Mualla</div>
-<!-- زر تغيير اللغة -->
 <div class="language-selector" style="position: relative; margin: 0 5px;">
   <button onclick="toggleLanguageMenu()" 
           style="background: transparent; border: none; cursor: pointer; padding: 0;">
-    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png
-
-" 
+    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
          alt="Language" 
          style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
   </button>
@@ -146,8 +143,7 @@ function toggleLanguageMenu() {
     var menu = document.getElementById("languageMenu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
-
-  // إخفاء القائمة عند النقر خارجها
+  
   document.addEventListener("click", function(e) {
     var menu = document.getElementById("languageMenu");
     var button = document.querySelector(".language-selector button");
