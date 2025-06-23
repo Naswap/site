@@ -7,7 +7,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
       color: #fff;
-      padding-top: 80px; /* لأن الهيدر ثابت */
+      padding-top: 80px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
