@@ -126,7 +126,6 @@ nav a:hover {
   font-size: 1rem;
 }
 
-/* شريط الأخبار */
 .news-ticker {
   background-color: #222;
   color: #fff;
@@ -225,7 +224,6 @@ nav a:hover {
       background-color: #008fcc;
     }
 
-/* الفوتر العصري */
 .modern-footer {
   margin-top: 60px;
   padding: 20px 10px;
