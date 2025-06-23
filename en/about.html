@@ -12,7 +12,7 @@
     <h1><i class="fas fa-user-circle"></i>About me</h1>
   </header>
   <section class="about" style="position: relative;">
-  <!-- زر تغيير اللغة -->
+    
   <div class="language-selector" style="position: absolute; top: 10px; left: 10px; cursor: pointer;">
     <button onclick="toggleLanguageMenu()" 
             style="background: transparent; border: none; padding: 0;">
@@ -59,7 +59,6 @@ function toggleLanguageMenu() {
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
 }
 
-// إخفاء القائمة عند النقر خارجها
 document.addEventListener("click", function(e) {
   var menu = document.getElementById("languageMenu");
   var button = document.querySelector(".language-selector button");
