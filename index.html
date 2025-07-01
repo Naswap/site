@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="الموقع التقني لمشروع Naswap — أخبار تقنية، أدوات ذكاء اصطناعي، ومواد توعوية رقمية باللغة العربية.">
-<meta property="og:title" content="naswap project" />
-<meta property="og:description" content="الموقع التقني الشامل لمشروع Naswap" />
-<meta property="og:image" content="https://nassrmualla.wap.sh/images/home2.jpg" />
-<meta property="og:url" content="https://naswap.github.io/site" />
-<meta property="og:type" content="website" />
-  <title>Naswap Project</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
- <style>
-   <link rel="icon" href="https://nassrmualla.wap.sh/images/nasicon.png" type="image/png">
+  <meta name="description" content="Naswap Project">
+  <meta property="og:title" content="naswap project" />
+  <meta property="og:description" content="الموقع التقني الشامل لمشروع Naswap" />
+  <meta property="og:image" content="https://nassrmualla.wap.sh/images/home2.jpg" />
+  <meta property="og:url" content="https://naswap.github.io/site" />
+  <meta property="og:type" content="website" />
+  <title>Naswap</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
 @media (max-width: 600px) {
   .dropdown-content {
     left: auto;
@@ -574,47 +573,109 @@ img[src*="xtgem"] {
       .sidebar.active {
         right: 0;
       }
-    
- </style>
+   .vpn-notice {
+      position: fixed;
+      top: -100px;
+      right: 0;
+      left: 0;
+      background-color: #f56565;
+      color: white;
+      padding: 11px;
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: top 0.5s ease;
+      z-index: 9999;
+    }
+
+    .vpn-notice.show {
+      top: 0;
+    }
+</style>
+  <script type="module">
+    // Firebase setup
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Qjg5U5etbF0yqdwr4EnQzg59_8rRlbw",
+      authDomain: "naswap-coin.firebaseapp.com",
+      databaseURL: "https://naswap-coin-default-rtdb.firebaseio.com",
+      projectId: "naswap-coin",
+      storageBucket: "naswap-coin.firebasestorage.app",
+      messagingSenderId: "118757193437",
+      appId: "1:118757193437:web:c26d37394722721a118d34"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const db = getDatabase();
+
+    window.onload = () => {
+      const loginBtn = document.getElementById("login-btn");
+      const pointsDisplay = document.getElementById("user-points");
+
+      onAuthStateChanged(auth, user => {
+        if (user) {
+          // Hide login button
+          loginBtn.style.display = 'none';
+
+          // Get points from database
+          const userId = user.uid;
+          get(ref(db, 'users/' + userId + '/points')).then(snapshot => {
+            if (snapshot.exists()) {
+              pointsDisplay.innerText = `coins: ${snapshot.val()}`;
+            } else {
+              pointsDisplay.innerText = "coins: 0";
+            }
+            pointsDisplay.style.display = 'inline-block';
+          }).catch(error => {
+            console.error("خطأ في جلب البيانات:", error);
+          });
+        } else {
+          loginBtn.style.display = 'inline-block';
+          pointsDisplay.style.display = 'none';
+        }
+      });
+    };
+  </script>
 </head>
 <body>
 <header>
   <div class="header-content">
+<!-- زر تسجيل الدخول -->
+    <div style="margin-left: 50px; margin-right: auto;">
+      <button id="login-btn" onclick="window.location.href='https://4style.hexat.com/fbncoin'" style="padding: 6px 12px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Log in
+      </button>
+      <span id="user-points" style="color: #fff; font-weight: bold; display: none; margin-right: 10px;"></span>
+    </div>
+
     <div class="logo">Naswap</div>
 
-<div class="language-selector" style="position: relative; margin: 0 5px;">
-  <button onclick="toggleLanguageMenu()" 
-          style="background: transparent; border: none; cursor: pointer; padding: 0;">
-    <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" 
-         alt="Language" 
-         style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
-  </button>
-  <ul id="languageMenu" style="
-      display: none; 
-      position: absolute; 
-      top: 30px; 
-      left: 0; 
-      background: #222; 
-      border-radius: 6px; 
-      list-style: none; 
-      padding: 5px 0; 
-      min-width: 110px; 
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 999;">
-    <li><a href="https://naswap.github.io/site" 
-           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
-    <li><a href="https://naswap.github.io/site/en" 
-           style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
-  </ul>
-</div>
+    <!-- زر تغيير اللغة -->
+    <div class="language-selector" style="position: relative; margin: 0 5px;">
+      <button onclick="toggleLanguageMenu()" style="background: transparent; border: none; cursor: pointer; padding: 0;">
+        <img src="https://icons.iconarchive.com/icons/marcus-roberto/google-play/24/Google-Translate-icon.png" alt="Language" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
+      </button>
+      <ul id="languageMenu" style="display: none; position: absolute; top: 30px; left: 0; background: #222; border-radius: 6px; list-style: none; padding: 5px 0; min-width: 110px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 999;">
+        <li><a href="https://naswap.github.io/site" style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">العربية</a></li>
+        <li><a href="https://naswap.github.io/site/en" style="display: block; padding: 8px 15px; color: #fff; text-decoration: none;">English</a></li>
+      </ul>
+    </div>
+
     <div class="dropdown" style="position: relative;">
-  <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-  <div class="dropdown-content" id="dropdownMenu">
-    <a href="ar/About">من نحن</a>
-    <a href="ar/privacy">سياسة الخصوصية</a>
-    <a href="ar/contribution">المساهمات</a>
+      <button class="dropdown-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="ar/About">من نحن</a>
+        <a href="ar/privacy">سياسة الخصوصية</a>
+        <a href="https://naswap.github.io/site/ar/contribution">المساهمات</a>
+<a href="https://naswap.github.io/site/ar/nascoin">Nascoin Bank</a>
+      </div>
+    </div>
   </div>
-</div>
 </header>
 
 <nav>
@@ -636,7 +697,7 @@ img[src*="xtgem"] {
   <a href="https://naswap.github.io/site"><i class="fas fa-home"></i> الرئيسية</a>
   <a href="https://naswap.github.io/site/ar/Aisec.html"><i class="fas fa-brain"></i> ذكاء اصطناعي</a>
   <a href="https://naswap.github.io/site/ar/technews.html"><i class="fas fa-newspaper"></i> اخبار تقنية</a>
-  <a href="https://naswap.github.io/site/ar/tbots.html"><i class="fas fa-shield-alt"></i>المجتمع</a>
+  <a href="ar/awareness"><i class="fas fa-shield-alt"></i>التوعية التقنية</a>
 </nav>
 
 <div class="news-ticker">
@@ -665,13 +726,14 @@ img[src*="xtgem"] {
       <h3>أخبار تقنية</h3>
       <p>آخر الاخبار التقنية من مصادر عربية موثوقة</p>
     </div>
-    <div class="card" onclick="location.href='https://naswap.github.io/ar/tbots.html'">
-      <img src="https://cdn-icons-png.flaticon.com/512/4280/4280051.png" alt="التوعية الرقمية" />
+    <div class="card" onclick="location.href='https://naswap.github.io/site/ar/awareness.html'">
+      <img src="https://cdn-icons-png.flaticon.com/512/4280/4280051.png" alt="التوعية التقنية" />
       <h3>التوعية الرقمية</h3>
       <p>نصائح ومعلومات لحمايتك في العالم الرقمي وتعزيز وعيك التكنولوجي.</p>
     </div>
   </div>
 </section>
+<!-- الخدمات -->
 <div class="glass-footer-cards">
   <div class="glass-card" data-link="https://naswap.github.io/site/ar/tbots.html"> 
     <i class="fab fa-telegram-plane"></i>
@@ -691,10 +753,11 @@ img[src*="xtgem"] {
     <div class="loader"></div>
   </div>
 </div>
+<!-- التطبيق -->
 <section style="background-color: #111; color: #f0f0f0; padding: 30px 20px; text-align: center; border-top: 1px solid #333;">
   <h3 style="margin-bottom: 10px; font-size: 1.1em;">حمّل تطبيق الموقع الرسمي</h3>
   <p style="margin-bottom: 20px; font-size: 0.5em;">استمتع بتجربة أسرع وأكثر سلاسة على هاتفك المحمول.</p>
-  
+ 
 <center><button class="button">
     <span class="button_lg">
         <span class="button_sl"></span>
@@ -703,6 +766,7 @@ img[src*="xtgem"] {
 </button></center>
 </section>
 
+<!-- new footer -->
 <div class="modern-footer">
   <p>جميع الحقوق محفوظة &copy; 2025</p>
   <div class="social-icons">
@@ -717,62 +781,72 @@ function toggleMenu() {
   const menu = document.getElementById("dropdownMenu");
   menu.classList.toggle("show");
 }
- function toggleLanguageMenu() {
-    var menu = document.getElementById("languageMenu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+function toggleLanguageMenu() {
+  var menu = document.getElementById("languageMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+document.addEventListener("click", function(e) {
+  var menu = document.getElementById("languageMenu");
+  var button = document.querySelector(".language-selector button");
+  if (!button.contains(e.target) && !menu.contains(e.target)) {
+    menu.style.display = "none";
   }
+});
 
-  document.addEventListener("click", function(e) {
-    var menu = document.getElementById("languageMenu");
-    var button = document.querySelector(".language-selector button");
-    if (!button.contains(e.target) && !menu.contains(e.target)) {
-      menu.style.display = "none";
-    }
-  });
 document.querySelector(".button").addEventListener("click", function(event) {
-        event.preventDefault();
+  event.preventDefault();
+  setTimeout(function() {
+    window.location.href = "https://www.raed.net/download?fileid=1338851";
+  }, 1000);
+});
 
-        setTimeout(function() {
-            window.location.href = "https://naswap.github.io/site";
-        }, 1000);
-    });
 document.querySelectorAll('.glass-card').forEach(card => {
-    card.addEventListener('click', function () {
-      const loader = this.querySelector('.loader');
-      const link = this.getAttribute('data-link');
-
-      loader.style.display = 'block';
-      
-      this.querySelector('i').style.opacity = '0';
-      this.querySelector('.glass-card-title').style.opacity = '0';
-
-      setTimeout(() => {
-        loader.style.display = 'none';
-        this.querySelector('i').style.opacity = '1';
-        this.querySelector('.glass-card-title').style.opacity = '1';
-        window.open(link, '_blank');
-      }, 1000);
-    });
+  card.addEventListener('click', function () {
+    const loader = this.querySelector('.loader');
+    const link = this.getAttribute('data-link');
+    loader.style.display = 'block';
+    this.querySelector('i').style.opacity = '0';
+    this.querySelector('.glass-card-title').style.opacity = '0';
+    setTimeout(() => {
+      loader.style.display = 'none';
+      this.querySelector('i').style.opacity = '1';
+      this.querySelector('.glass-card-title').style.opacity = '1';
+      window.open(link, '_blank');
+    }, 1000);
   });
+});
 
 const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
+const overlay = document.getElementById("overlay");
 
-    function toggleSidebar() {
-      sidebar.classList.toggle("active");
-      overlay.classList.toggle("active");
-    }
+function toggleSidebar() {
+  sidebar.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
 
-    const links = sidebar.querySelectorAll("a");
-    links.forEach(link => {
-      link.addEventListener("click", () => {
-        sidebar.classList.remove("active");
-        overlay.classList.remove("active");
-      });
-    });
+const links = sidebar.querySelectorAll("a");
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+});
 </script>
+<div class="vpn-notice" id="vpnNotice" dir="auto">من الافضل تشغيل vpn لاستخدام الخدمات البنكية</div>
 
+<script>
+  window.addEventListener('load', () => {
+    const notice = document.getElementById('vpnNotice');
+    setTimeout(() => {
+      notice.classList.add('show');
+    }, 1000); // يظهر بعد 1 ثانية
+
+    setTimeout(() => {
+      notice.classList.remove('show');
+    }, 6000); // يختفي بعد 6 ثوانٍ من التحميل (1 ثانية + 5 ثوانٍ)
+  });
+</script>
 </body>
 </html>
-
-
