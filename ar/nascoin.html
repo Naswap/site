@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NASWAP Bank - حسابك البنكي</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f6f9;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #003366;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #e9eef4;
+      padding: 15px 10px;
+      border-bottom: 1px solid #d0d7de;
+    }
+
+    .action-btn {
+      background-color: #005cbf;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .action-btn:hover {
+      background-color: #004a99;
+    }
+
+    #updateStatus {
+      text-align: center;
+      font-size: 14px;
+      color: green;
+      margin-top: 5px;
+    }
+
+    #statusMessage {
+      text-align: center;
+      font-size: 15px;
+      padding: 10px;
+      background-color: #e9eef4;
+      border-top: 1px solid #d0d7de;
+      color: #333;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+      background-color: #f4f6f9;
+    }
+
+    .bank-card {
+      background: linear-gradient(135deg, #003366, #005cbf);
+      color: #fff;
+      border-radius: 12px;
+      width: 360px;
+      height: 220px;
+      padding: 20px 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .sim-chip {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      width: 50px;
+      height: 32px;
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      border-radius: 5px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+      box-shadow: inset 0 0 5px #f9e58a, 0 0 6px #b8860b;
+    }
+
+    .sim-chip div {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 1px;
+    }
+
+    .bank-name {
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+
+    .account-label {
+      font-size: 14px;
+      margin-top: 20px;
+      color: #dddddd;
+    }
+
+    .account-number {
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 5px;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .points-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    
+
+    #refreshCardButton {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #003366;
+      color: #ccc;
+      text-align: center;
+      font-size: 14px;
+      padding: 15px 10px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    }
+
+    #points-box {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #00ffcc;
+      padding: 8px 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #points-box:hover {
+      transform: scale(1.05);
+    }
+
+    .vpn-notice {
+      position: fixed;
+      top: -100px;
+      right: 0;
+      left: 0;
+      background-color: #e3342f;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      transition: top 0.5s ease;
+      z-index: 9999;
+    }
+
+    .vpn-notice.show {
+      top: 0;
+    }
+
+    .vpn-notice button {
+      background: white;
+      color: #e3342f;
+      border: none;
+      padding: 5px 10px;
+      margin-right: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* نافذة إرسال الرصيد */
+    #sendCreditModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    #sendCreditModal > div {
+      background: #fff;
+      width: 90%;
+      max-width: 900px;
+      height: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #sendCreditModal button#closeSendCreditModal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #e3342f;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+.points-combined {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div id="points-box">
+      <img src="images/Nascoin.png" alt="أيقونة نقاط" width="20" height="20" />
+      <span id="points">0</span>
+    </div>
+    Naswap Bank
+  </header>
+
+  <div class="actions">
+    <button id="storeButton" class="action-btn">المتجر</button>
+    <button id="sendCreditButton" class="action-btn" style="display:none">ارسال رصيد</button>
+    <button id="loginButton" class="action-btn">تسجيل الدخول</button>
+    <button id="logoutButton" class="action-btn" style="display:none">تسجيل الخروج</button>
+    <button id="updatePointsButton" class="action-btn" style="display:none">جمع</button>
+    <div id="updateStatus"></div>
+  </div>
+
+  <div id="statusMessage">جاري التحقق من حالة تسجيل الدخول...</div>
+
+  <main>
+    <section class="bank-card" aria-label="بطاقة الحساب البنكي">
+      <div>
+        <div class="bank-name">Naswap Bank</div>
+        <div class="sim-chip">
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
+        <div class="account-label">Account No.</div>
+        <div id="accountNumber" class="account-number">0000 0000 0000 0000</div>
+      </div>
+      <div class="points-container">
+  <div class="points-combined">
+    <span id="pointsBalance">0</span>
+    <span class="points-label">Cash</span>
+  </div>
+  <button id="refreshCardButton" title="تحديث البيانات">🔄</button>
+</div>
+
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Naswap Bank. جميع الحقوق محفوظة.
+  </footer>
+
+
+  <div id="sendCreditModal">
+    <div>
+      <button id="closeSendCreditModal">إغلاق</button>
+      <iframe src="https://naswap.github.io/site/ar/trans.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+  </div>
+
+  <div class="vpn-notice" id="vpnNotice">من الأفضل استخدام VPN للوصول الآمن للخدمات البنكية.</div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Qjg5U5etbF0yqdwr4EnQzg59_8rRlbw",
+      authDomain: "naswap-coin.firebaseapp.com",
+      databaseURL: "https://naswap-coin-default-rtdb.firebaseio.com",
+      projectId: "naswap-coin",
+      storageBucket: "naswap-coin.appspot.com",
+      messagingSenderId: "118757193437",
+      appId: "1:118757193437:web:c26d37394722721a118d34"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    function formatAccountNumber(acc) {
+      return acc.replace(/(.{4})/g, '$1 ').trim();
+    }
+
+    function updateUI(user) {
+  const loginBtn = document.getElementById("loginButton");
+  const logoutBtn = document.getElementById("logoutButton");
+  const updateBtn = document.getElementById("updatePointsButton");
+  const sendCreditBtn = document.getElementById("sendCreditButton");
+  const statusMsg = document.getElementById("statusMessage");
+  const accountNumElem = document.getElementById("accountNumber");
+
+  if (user) {
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    updateBtn.style.display = "inline-block";
+    sendCreditBtn.style.display = "inline-block";
+
+    const accountNumberRef = ref(db, `users/${user.uid}/accountNumber`);
+    const pointsRef = ref(db, `users/${user.uid}/points`);
+
+    Promise.all([get(accountNumberRef), get(pointsRef)]).then(([accSnap, pointsSnap]) => {
+      let accNum = accSnap.val() || "0000000000000000";
+      accountNumElem.textContent = formatAccountNumber(accNum);
+
+      const points = pointsSnap.val() || 0;
+      document.getElementById("pointsBalance").textContent = points.toLocaleString();
+
+      statusMsg.textContent = "تم تسجيل الدخول";
+      statusMsg.style.color = "#00ff99";
+      statusMsg.style.display = "block";
+    }).catch(() => {
+      accountNumElem.textContent = "0000 0000 0000 0000";
+      document.getElementById("pointsBalance").textContent = "0";
+      statusMsg.textContent = "خطأ في جلب البيانات";
+      statusMsg.style.color = "#ff4444";
+      statusMsg.style.display = "block";
+    });
+
+  } else {
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+    updateBtn.style.display = "none";
+    sendCreditBtn.style.display = "none";
+
+    accountNumElem.textContent = "0000 0000 0000 0000";
+    document.getElementById("pointsBalance").textContent = "0";
+
+    statusMsg.textContent = "أنت غير مسجل دخول";
+    statusMsg.style.color = "#ff4444";
+    statusMsg.style.display = "block";
+  }
+
+  setTimeout(() => {
+    statusMsg.style.display = "none";
+  }, 3000);
+}
+
+
+    onAuthStateChanged(auth, (user) => {
+      updateUI(user);
+    });
+
+    document.getElementById("loginButton").onclick = () => {
+      window.location.href = "https://4style.hexat.com/fbncoin";
+    };
+
+    document.getElementById("logoutButton").onclick = () => {
+      signOut(auth).then(() => location.reload());
+    };
+
+    
+    document.getElementById("updatePointsButton").addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        showMessage("يجب تسجيل الدخول أولاً", "#ff4444");
+        return;
+      }
+
+      let localPoints = parseInt(localStorage.getItem("userPoints")) || 0;
+      if (localPoints <= 0) {
+        showMessage("لا يوجد رصيد للنقل من التخزين المحلي", "#ff4444");
+        return;
+      }
+
+      const userPointsRef = ref(db, `users/${user.uid}/points`);
+
+      try {
+        const snapshot = await get(userPointsRef);
+        const firebasePoints = snapshot.val() || 0;
+
+        const newPointsTotal = firebasePoints + localPoints;
+        await set(userPointsRef, newPointsTotal);
+        localStorage.setItem("userPoints", 0);
+        points = 0;
+        document.getElementById("pointsBalance").textContent = newPointsTotal.toLocaleString();
+        document.getElementById('points').textContent = 0;
+
+        showMessage(`تم نقل ${localPoints} رصيد إلى حسابك`, "#00ff99");
+      } catch (error) {
+        showMessage("خطأ أثناء نقل الرصيد: " + error.message, "#ff4444");
+      }
+    });
+
+    
+    document.getElementById("refreshCardButton").addEventListener("click", () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const accountNumberRef = ref(db, `users/${user.uid}/accountNumber`);
+      const pointsRef = ref(db, `users/${user.uid}/points`);
+
+      Promise.all([
+        get(accountNumberRef),
+        get(pointsRef)
+      ]).then(([accSnap, pointsSnap]) => {
+        let accNum = accSnap.val() || "0000000000000000";
+        document.getElementById("accountNumber").textContent = formatAccountNumber(accNum);
+
+        const points = pointsSnap.val() || 0;
+        document.getElementById("pointsBalance").textContent = points.toLocaleString();
+
+        const msg = document.getElementById("statusMessage");
+        msg.textContent = "تم تحديث البيانات";
+        msg.style.color = "#00ff99";
+        msg.style.display = "block";
+
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 3000);
+      });
+    });
+
+    function showMessage(text, color) {
+      const updateStatus = document.getElementById("updateStatus");
+      updateStatus.textContent = text;
+      updateStatus.style.color = color;
+      clearTimeout(showMessage.timeout);
+      showMessage.timeout = setTimeout(() => {
+        updateStatus.textContent = "";
+      }, 3500);
+    }
+
+    const secondsPerPoint = 3;
+    let points = 0;
+    document.getElementById('points').textContent = points;
+
+    let isActive = true;
+    document.addEventListener('visibilitychange', () => {
+      isActive = !document.hidden;
+    });
+
+    setInterval(() => {
+      if (isActive) {
+        points++;
+        localStorage.setItem('userPoints', points);
+        document.getElementById('points').textContent = points;
+      }
+    }, secondsPerPoint * 1000);
+
+    document.getElementById('points-box').addEventListener('click', () => {
+      alert("رصيدك الحالي هو: " + points + " ");
+    });
+
+const sendCreditButton = document.getElementById('sendCreditButton');
+const sendCreditModal = document.getElementById('sendCreditModal');
+const closeSendCreditModal = document.getElementById('closeSendCreditModal');
+
+sendCreditButton.addEventListener('click', () => {
+  sendCreditModal.style.display = 'flex';
+});
+
+closeSendCreditModal.addEventListener('click', () => {
+  sendCreditModal.style.display = 'none';
+});
+
+document.getElementById("storeButton").onclick = () => {
+  window.location.href = "https://4style.hexat.com/store";
+};
+
+window.addEventListener('load', () => {
+    const notice = document.getElementById('vpnNotice');
+    setTimeout(() => {
+      notice.classList.add('show');
+    }, 1000);
+
+    setTimeout(() => {
+      notice.classList.remove('show');
+    }, 6000);
+  });
+  </script>
+
+</body>
+  </html>
+  
