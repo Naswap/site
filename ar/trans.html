@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NASWAP Bank - Nascoin Transfer</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      color: #003366;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .balance {
+      text-align: center;
+      background-color: #e0f3ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #0077b6;
+      font-size: 18px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    input:focus {
+      border-color: #0077b6;
+      outline: none;
+    }
+
+    button {
+      background-color: #0077b6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #005f91;
+    }
+
+    #transferStatus {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      min-height: 24px;
+    }
+
+    #transferLog {
+      margin-top: 30px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      table-layout: auto;
+    }
+
+    thead {
+      background-color: #0077b6;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    tbody tr.sent {
+      background-color: #ffe0e0;
+      color: #990000;
+    }
+
+    tbody tr.received {
+      background-color: #e0ffe0;
+      color: #006600;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 10px;
+      }
+
+      table {
+        font-size: 12px;
+        table-layout: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nascoin Transfer</h1>
+    <div class="balance" id="pointsBalance">جارٍ تحميل الرصيد...</div>
+
+    <input type="text" id="recipientAccount" placeholder="رقم حساب المستلم" />
+    <input type="number" id="transferAmount" placeholder="المبلغ" />
+    <button id="transferPointsBtn">ارسال </button>
+    <div id="transferStatus"></div>
+
+    <div id="transferLog">جاري تحميل السجل...</div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, get, set, push } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9Qjg5U5etbF0yqdwr4EnQzg59_8rRlbw",
+      authDomain: "naswap-coin.firebaseapp.com",
+      databaseURL: "https://naswap-coin-default-rtdb.firebaseio.com",
+      projectId: "naswap-coin",
+      storageBucket: "naswap-coin.appspot.com",
+      messagingSenderId: "118757193437",
+      appId: "1:118757193437:web:c26d37394722721a118d34"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    let currentUser = null;
+    let currentUserPoints = 0;
+
+    const statusEl = document.getElementById("transferStatus");
+    const logContainer = document.getElementById("transferLog");
+    const balanceEl = document.getElementById("pointsBalance");
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        loadBalance(user.uid);
+        loadTransferHistory(user.uid);
+      } else {
+        logContainer.textContent = "";
+        balanceEl.textContent = "يرجى تسجيل الدخول";
+      }
+    });
+
+    async function loadBalance(uid) {
+      const userRef = ref(db, `users/${uid}`);
+      const snap = await get(userRef);
+      if (snap.exists()) {
+        const data = snap.val();
+        currentUserPoints = data.points || 0;
+        balanceEl.textContent = `رصيدك: ${currentUserPoints.toLocaleString()}`;
+      } else {
+        balanceEl.textContent = "تعذر تحميل الرصيد.";
+      }
+    }
+
+    document.getElementById("transferPointsBtn").addEventListener("click", async () => {
+      statusEl.textContent = "";
+      statusEl.style.color = "#333";
+
+      if (!currentUser) {
+        statusEl.textContent = "يجب تسجيل الدخول للقيام بالتحويل.";
+        statusEl.style.color = "#c00";
+        return;
+      }
+
+      const senderUid = currentUser.uid;
+      const recipientAcc = document.getElementById("recipientAccount").value.trim().replace(/\s/g, '');
+      const amount = parseInt(document.getElementById("transferAmount").value);
+
+      if (!recipientAcc || isNaN(amount) || amount <= 0) {
+        statusEl.textContent = "يرجى إدخال رقم الحساب والمبلغ بشكل صحيح.";
+        statusEl.style.color = "#c00";
+        return;
+      }
+
+      try {
+        const senderRef = ref(db, `users/${senderUid}`);
+        const senderSnap = await get(senderRef);
+        if (!senderSnap.exists()) {
+          statusEl.textContent = "بياناتك غير موجودة في النظام.";
+          statusEl.style.color = "#c00";
+          return;
+        }
+
+        const senderData = senderSnap.val();
+        if (senderData.points < amount) {
+          statusEl.textContent = "رصيدك غير كافٍ.";
+          statusEl.style.color = "#c00";
+          return;
+        }
+
+        const usersRef = ref(db, 'users');
+        const usersSnap = await get(usersRef);
+        let recipientUid = null;
+
+        usersSnap.forEach(childSnap => {
+          if (childSnap.val().accountNumber === recipientAcc) {
+            recipientUid = childSnap.key;
+          }
+        });
+
+        if (!recipientUid) {
+          statusEl.textContent = "الحساب المستلم غير موجود.";
+          statusEl.style.color = "#c00";
+          return;
+        }
+
+        const recipientRef = ref(db, `users/${recipientUid}/points`);
+        const recipientSnap = await get(recipientRef);
+        const recipientPoints = recipientSnap.val() || 0;
+
+        await set(ref(db, `users/${senderUid}/points`), senderData.points - amount);
+        await set(recipientRef, recipientPoints + amount);
+
+        const timestamp = Date.now();
+        await push(ref(db, `users/${senderUid}/transferHistory`), {
+          toAccount: recipientAcc,
+          amount: amount,
+          type: "sent",
+          timestamp
+        });
+
+        await push(ref(db, `users/${recipientUid}/transferHistory`), {
+          fromAccount: senderData.accountNumber,
+          amount: amount,
+          type: "received",
+          timestamp
+        });
+
+        statusEl.textContent = `تم تحويل ${amount.toLocaleString()} إلى الحساب ${recipientAcc}.`;
+        statusEl.style.color = "#007700";
+        balanceEl.textContent = `رصيدك: ${(senderData.points - amount).toLocaleString()} `;
+
+        loadTransferHistory(senderUid);
+
+      } catch (err) {
+        statusEl.textContent = "فشل التحويل: " + err.message;
+        statusEl.style.color = "#c00";
+      }
+    });
+
+    async function loadTransferHistory(uid) {
+      logContainer.textContent = "جاري تحميل السجل...";
+      const historyRef = ref(db, `users/${uid}/transferHistory`);
+      const snap = await get(historyRef);
+
+      if (!snap.exists()) {
+        logContainer.innerHTML = "<p style='color:#666;'>لا يوجد تحويلات سابقة.</p>";
+        return;
+      }
+
+      const history = Object.values(snap.val()).sort((a, b) => b.timestamp - a.timestamp);
+      let tableHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>العملية</th>
+              <th>الحساب</th>
+              <th>المبلغ</th>
+              <th>التاريخ</th>
+              <th>الوقت</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      for (const entry of history) {
+        const isSent = entry.type === "sent";
+        const account = isSent ? entry.toAccount : entry.fromAccount;
+        const typeLabel = isSent ? "إرسال" : "استقبال";
+        const rowClass = isSent ? "sent" : "received";
+
+        const dateObj = new Date(entry.timestamp);
+        const dateStr = dateObj.toLocaleDateString('ar-EG');
+        const timeStr = dateObj.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+        tableHTML += `
+          <tr class="${rowClass}">
+            <td>${typeLabel}</td>
+            <td>${account}</td>
+            <td>${entry.amount.toLocaleString()}</td>
+            <td>${dateStr}</td>
+            <td>${timeStr}</td>
+          </tr>
+        `;
+      }
+
+      tableHTML += `</tbody></table>`;
+      logContainer.innerHTML = tableHTML;
+    }
+  </script>
+</body>
+</html>
