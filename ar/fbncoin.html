@@ -174,7 +174,7 @@ direction: rtl;
   <div id="popupContainer">
     <div id="popupContent">
       <button id="closePopup" onclick="closePopup()">إغلاق</button>
-      <iframe src="https://4style.hexat.com/recovery"></iframe>
+      <iframe src="https://naswap.github.io/site/ar/recovery.html"></iframe>
     </div>
   </div>
 
@@ -328,7 +328,7 @@ direction: rtl;
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         await updateProfile(user, { displayName: name });
-        // حفظ بيانات إضافية في قاعدة البيانات
+      
         await set(ref(db, 'users/' + user.uid), {
           name,
           email,
@@ -342,7 +342,7 @@ direction: rtl;
         message.style.color = "green";
         message.textContent = "تم إنشاء الحساب بنجاح، جاري إعادة التوجيه...";
         setTimeout(() => {
-          window.location.href = "https://4style.hexat.com/nascoin";
+          window.location.href = "https://naswap.github.io/site/ar/nascoin.html";
         }, 1000);
       } catch (error) {
         message.style.color = "red";
@@ -368,7 +368,7 @@ direction: rtl;
         message.style.color = "green";
         message.textContent = `مرحبًا ${user.displayName || ""}! رصيدك: ${points} نقطة. جاري إعادة التوجيه...`;
         setTimeout(() => {
-          window.location.href = "https://4style.hexat.com/nascoin";
+          window.location.href = "https://naswap.github.io/site/ar/nascoin.html";
         }, 1000);
       } catch (error) {
         message.style.color = "red";
